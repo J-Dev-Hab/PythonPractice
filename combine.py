@@ -1,5 +1,6 @@
 import pandas as pd
 from pathlib import Path
+from datetime import datetime
 
 # dataフォルダの中のすべてのCSVを読み込む
 folder = Path("data")
@@ -41,7 +42,10 @@ print("\n【商品ごとの合計】")
 print(product_total)
 
 # Excelに出力（全体 + 商品ごと）
-output_path = Path("output") / "まとめ.xlsx"
+from datetime import datetime
+today = datetime.now().strftime("%Y%m%d")
+output_path = Path("output") / f"まとめ_{today}.xlsx"
+
 with pd.ExcelWriter(output_path) as writer:
     result.to_excel(writer, sheet_name="全体", index=False)
     product_total.to_excel(writer, sheet_name="商品ごと")
