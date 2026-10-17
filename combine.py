@@ -14,6 +14,15 @@ for file in csv_files:
 
 result = pd.concat(dfs, ignore_index=True)
 
+# エラーチェック
+if len(csv_files) == 0:
+    print("エラー: dataフォルダにCSVファイルがありません")
+    exit()
+
+if "金額" not in result.columns or "商品" not in result.columns:
+    print("エラー: CSVに「金額」または「商品」の列がありません")
+    exit()
+
 # 全体の合計・平均
 total = result["金額"].sum()
 average = result["金額"].mean()
